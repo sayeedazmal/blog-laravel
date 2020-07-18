@@ -24,8 +24,8 @@
                         <div class="header">
                             <h2>
                               All Tags
+                              <span class="badge bg-blue"> {{ $tags->count() }} </span>
                             </h2>
-
                         </div>
                         <div class="body">
                             <div class="table-responsive">
@@ -34,16 +34,17 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Name</th>
+                                            <th>PostCount</th>
                                             <th>Created At</th>
                                             <th>Updated At</th>
                                             <th>Action</th>
-
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                           <th>ID</th>
                                           <th>Name</th>
+                                          <th>PostCount</th>
                                           <th>Created At</th>
                                           <th>Updated At</th>
                                           <th>Action</th>
@@ -54,6 +55,7 @@
                                         <tr>
                                           <td>{{ $key + 1 }}</td>
                                           <td>{{ $tag->name }}</td>
+                                          <td>{{ $tag->posts->count()}}</td>
                                           <td>{{ $tag->created_at }}</td>
                                           <td>{{ $tag->updated_at }}</td>
                                           <td><a  href="{{route('admin.tag.edit',$tag->id)}}" class="btn btn-info waves-effect">
@@ -67,8 +69,7 @@
                                             @method('DELETE');
                                           </form>
                                         </td>
-
-                                        </tr>
+                                      </tr>
                                       @endforeach
 
                                     </tbody>

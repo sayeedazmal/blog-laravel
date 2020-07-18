@@ -46,7 +46,7 @@ class TagController extends Controller
         $tag->slug = str_slug($request->name);
         $tag->save();
 
-         Toastr::success('Tag added successfully', 'Sucess');
+        Toastr::success('Tag added successfully', 'Sucess');
         return redirect()->route('admin.tag.index');
 
     }

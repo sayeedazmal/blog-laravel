@@ -24,6 +24,7 @@
                         <div class="header">
                             <h2>
                               All Catagories
+                              <span class="badge bg-blue">{{ $catagories->count() }}</span>
                             </h2>
 
                         </div>
@@ -36,6 +37,8 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Name</th>
+                                            <th>Image</th>
+                                            <th>PostCount</th>
                                             <th>Created At</th>
                                             <th>Updated At</th>
                                             <th>Action</th>
@@ -46,6 +49,8 @@
                                         <tr>
                                           <th>ID</th>
                                           <th>Name</th>
+                                          <th>Image</th>
+                                          <th>PostCount</th>
                                           <th>Created At</th>
                                           <th>Updated At</th>
                                           <th>Action</th>
@@ -58,18 +63,20 @@
                                         <tr>
                                           <td>{{ $key + 1}}</td>
                                           <td>{{ $ctg->name }}</td>
+                                          <td><img style="height:80px; width:80px" src="{{ Storage::disk('public')->url('category/').$ctg->image}}" alt=""></td>
+                                          <td>{{ $ctg->posts->count() }}</td>
                                           <td>{{ $ctg->created_at }}</td>
                                           <td>{{ $ctg->updated_at }}</td>
 
-                                          <td><a  href="{{ route('admin.catagory.edit')}}" class="btn btn-info waves-effect">
+                                          <td><a  href="{{ route('admin.catagory.edit',$ctg->id)}}" class="btn btn-info waves-effect">
                                             <i class="material-icons">edit</i>
                                           </a>
-                                          <button class="btn btn-danger waves-effect" type="button" onclick="">
+                                          <button class="btn btn-danger waves-effect" type="button" onclick="deletectg({{ $ctg->id }})">
                                               <i class="material-icons">delete</i>
                                           </button>
-                                          <form id="" style="display: none;" action="" method="post">
-                                            @csrf
-                                            @method('DELETE');
+                                            <form id="delete-form-{{ $ctg->id }}" style="display: none;" action="{{ route('admin.catagory.destroy', $ctg->id) }}" method="post">
+                                              @csrf
+                                              @method('DELETE');
                                           </form>
                                         </td>
                                         </tr>
@@ -104,7 +111,7 @@
 
   <script type="text/javascript">
 
-  function deletetag(id) {
+  function deletectg(id) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',

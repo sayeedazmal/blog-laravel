@@ -3,7 +3,7 @@
     <!-- User Info -->
     <div class="user-info">
         <div class="image">
-            <img src="{{asset('assets/Backend/images/user.png')}}" width="48" height="48" alt="User" />
+            <img src="{{ Storage::disk('public')->url('profile/'. Auth::user()->image)}}" width="48" height="48" alt="User" />
         </div>
         <div class="info-container">
             <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</div>
@@ -53,9 +53,54 @@
                       <span>Catagory</span>
                   </a>
               </li>
+              <li class="{{ Request:: is('admin/post*')? 'active' : '' }}">
+                  <a href="{{ route('admin.post.index') }}">
+                      <i class="material-icons">book</i>
+                      <span>Post</span>
+                  </a>
+              </li>
+
+               <li class="{{ Request:: is('admin/authors')? 'active' : '' }}">
+                  <a href="{{ route('admin.author') }}">
+                      <i class="material-icons">label</i>
+                      <span>Author</span>
+                  </a>
+               </li>
+
+              <li class="{{ Request:: is('admin/panding/post')? 'active' : '' }}">
+                  <a href="{{ route('admin.post.panding') }}">
+                      <i class="material-icons">book</i>
+                      <span>PandingPost</span>
+                  </a>
+              </li>
+
+              <li class="{{ Request:: is('admin/subscribe')? 'active' : '' }}">
+                  <a href="{{ route('admin.subscribe.index') }}">
+                      <i class="material-icons">book</i>
+                      <span>Subscriber</span>
+                  </a>
+              </li>
+              <li class="{{ Request:: is('admin/favorite')? 'active' : '' }}">
+                  <a href="{{ route('admin.favorite.index') }}">
+                      <i class="material-icons">favorite</i>
+                      <span>Favorite</span>
+                  </a>
+              </li>
+              <li class="{{ Request:: is('admin/comments')? 'active' : '' }}">
+                  <a href="{{ route('admin.comment.index') }}">
+                      <i class="material-icons">comment</i>
+                      <span>Comments</span>
+                  </a>
+              </li>
 
               <li class="header">
                 Syestem
+              </li>
+              <li class="{{ Request:: is('admin/settings')? 'active' : '' }}">
+                  <a href="{{ route('admin.settings') }}">
+                      <i class="material-icons">settings</i>
+                      <span>Settings</span>
+                  </a>
               </li>
               <li>
                   <a href="{{ route('admin.deshboard') }}">
@@ -81,8 +126,33 @@
                       <span>Deshboard</span>
                   </a>
               </li>
+              <li class="{{ Request:: is('author/post*')? 'active' : '' }}">
+                  <a href="{{ route('author.post.index') }}">
+                      <i class="material-icons">book</i>
+                      <span>Post</span>
+                  </a>
+              </li>
+
+              <li class="{{ Request:: is('author/favorite')? 'active' : '' }}">
+                  <a href="{{ route('author.favorite.index') }}">
+                      <i class="material-icons">favorite</i>
+                      <span>Favorite</span>
+                  </a>
+              </li>
+              <li class="{{ Request:: is('author/comments')? 'active' : '' }}">
+                  <a href="{{ route('author.comment.index') }}">
+                      <i class="material-icons">comment</i>
+                      <span>Comments</span>
+                  </a>
+              </li>
               <li class="header">
                 Syestem
+              </li>
+              <li class="{{ Request:: is('author/settings')? 'active' : '' }}">
+                  <a href="{{ route('author.settings') }}">
+                      <i class="material-icons">settings</i>
+                      <span>Settings</span>
+                  </a>
               </li>
               <li>
                   <a href="{{ route('author.deshboard') }}">
@@ -110,10 +180,10 @@
     <!-- Footer -->
     <div class="legal">
         <div class="copyright">
-            &copy; 2016 - 2017 <a href="javascript:void(0);">AdminBSB - Material Design</a>.
+            &copy; 2020 - 2021 <a href="javascript:void(0);">Admin</a>.
         </div>
         <div class="version">
-            <b>Version: </b> 1.0.5
+            <b>Verson: </b> Beta
         </div>
     </div>
     <!-- #Footer -->

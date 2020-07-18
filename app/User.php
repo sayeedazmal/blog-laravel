@@ -15,7 +15,7 @@ use Illuminate\Notifications\Notifiable;
          */
 
         protected $fillable = [
-            'name', 'email', 'password',
+            'role_id','name', 'username','email', 'password',
         ];
 
         /**
@@ -43,5 +43,18 @@ use Illuminate\Notifications\Notifiable;
           return $this->belongsTo('App\Role');
         }
 
+        public function posts(){
+          return $this->hasMany('App\post');
+        }
+        public function favorite_to_post(){
+          return $this->belongsToMany('App\post')->withTimestamps();
+        }
+
+        public function comments(){
+          return $this->hasMany('App\Comment');
+        }
+      public function scopeAuthors($query){
+        return $query->where('role_id',2);
+      }
 
 }
