@@ -43,17 +43,17 @@
   <section class="blog-area section">
     <div class="container">
       <div class="row">
-        @foreach ($posts as $posts)
+        @foreach ($posts as $post)
           <div class="col-lg-4 col-md-6">
             <div class="card h-100">
               <div class="single-post post-style-1">
-                <div class="blog-image"><img src="{{ Storage::disk('public')->url('post/').$posts->image }}" alt="{{$posts->name}}"></div>
+                <div class="blog-image"><img src="{{ Storage::disk('public')->url('post/').$post->image }}" alt="{{$post->name}}"></div>
 
-                <a class="avatar" href="{{ route('author.profile', $posts->user->username) }}"><img src="{{ Storage::disk('public')->url('Profile/').$posts->user->image }}" alt="Profile Image"></a>
+                <a class="avatar" href="{{ route('author.profile', $post->user->username) }}"><img src="{{ Storage::disk('public')->url('Profile/').$post->user->image }}" alt="Profile Image"></a>
 
                 <div class="blog-info">
 
-                  <h4 class="title"><a href="{{ route('post.details',$posts->slug  ) }}"><b>{{ $posts->title }}</b></a></h4>
+                  <h4 class="title"><a href="{{ route('post.details',$post->slug  ) }}"><b>{{ $post->title }}</b></a></h4>
 
                   <ul class="post-footer">
                     <li>
@@ -62,22 +62,22 @@
                             closeButton:true,
                             progressBar:true,
                           })"><i class="ion-heart"></i>
-                          {{ $posts->favourite_to_users->count() }}
+                          {{ $post->favourite_to_users->count() }}
                           </a>
                         @else
-                          <a href="javascript:void(0);" onclick="document.getElementById('favorite-form-{{ $posts->id }}').submit();"
-                            class="{{ !Auth::user()->favorite_to_post->where('pivot.post_id', $posts->id)->count() == 0 ? 'favorite-post' : ''}}"
+                          <a href="javascript:void(0);" onclick="document.getElementById('favorite-form-{{ $post->id }}').submit();"
+                            class="{{ !Auth::user()->favorite_to_post->where('pivot.post_id', $post->id)->count() == 0 ? 'favorite-post' : ''}}"
                             ><i class="ion-heart"></i>
-                          {{ $posts->favourite_to_users->count() }}
+                          {{ $post->favourite_to_users->count() }}
                           </a>
-                          <form id="favorite-form-{{ $posts->id }}" style="display: none" class="" action="{{ route('post.favorite', $posts->id) }}" method="post">
+                          <form id="favorite-form-{{ $post->id }}" style="display: none" class="" action="{{ route('post.favorite', $post->id) }}" method="post">
                             @csrf
                           </form>
 
                       @endguest
                     </li>
-                    <li><a href="#"><i class="ion-chatbubble"></i>{{ $posts->comments->count() }}</a></li>
-                    <li><a href="#"><i class="ion-eye"></i>{{ $posts->view_count }}</a></li>
+                    <li><a href="#"><i class="ion-chatbubble"></i>{{ $post->comments->count() }}</a></li>
+                    <li><a href="#"><i class="ion-eye"></i>{{ $post->view_count }}</a></li>
                   </ul>
 
                 </div><!-- blog-info -->
@@ -89,7 +89,7 @@
 
       </div><!-- row -->
 
-      <a class="load-more-btn" href="#"><b>LOAD MORE</b></a>
+       {{$posts->links()}}
 
     </div><!-- container -->
   </section><!-- section -->

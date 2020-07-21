@@ -17,7 +17,6 @@ class DeshboardController extends Controller
      $populer_post = $user->posts()
       ->withCount('comments')
       ->withCount('favourite_to_users')
-      ->withCount('favourite_to_users')
       ->orderBy('view_count','desc')
       ->orderBy('comments_count')
       ->orderBy('favourite_to_users_count')
